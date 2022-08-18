@@ -1,80 +1,54 @@
-import { useState } from "react"
-import React from 'react'
+import React,{useState} from 'react'
 
-function ProfileForm() {
+function ProfileForm({submit}) {
     const [profile, setProfile] =useState({
-       firstname: "",
-       lastname: "",
-       email: "",
-       phone: ""
-   });
-   
-   const handler=(event) => {
-    setProfile((prev) =>({
-        ...prev,
-        [event.target.name]: event.target.value
-    }));
-}
-const handleform=(e) =>{
-    e.preventDefault();
-    SubmitEvent(profile)
-
-}
-        
-
-     
-
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: ""
+    })
     
+    const handler =(event) => {
+        setProfile((prev) => ({
+            ...prev,
+            [event.target.name]: event.target.value
+        }));
+    }
+    const handleForm = (e) => {
+        e.preventDefault();
+        submit(profile)
+    }
 
-    
-
-     
-   
 
   return (
-    <div className="fromcontainer">
-    <h3>profile from</h3>
+    <div className='fromContainer'>
+         <h3>Profile From</h3>
+         <form onsubmit={handleForm}>
+            <fieldset>Bio data</fieldset>
+             <div className='names'>
+                <label>First Name
+                    <input name='firstname' value=
+                        {profile.firstname} type="text" onChange={handler}/>
+                </label>
+                <label>Last Name
+                    <input name='lastname' value=
+                        {profile.lastname} type="text" onChange={handler}/>
+                </label>
 
-    <form>
-    <fieldset>
-    <legend>Bio data</legend>
-    <div className="names">
-    <lebal>First Name
-    <input name="firstname" value=
-    {profile.firstname} type="text"onChange={handler}/>
+             </div>
+             <div className='names'>
+                <label>Email
+                    <input name='email' value=
+                        {profile.email} type="email" onChange={handler}/>
+                </label>
+                <label>phone
+                    <input name='phone' value=
+                        {profile.phone} type="tel" onChange={handler}/>
+                </label>
 
-    </lebal>
-
-    </div>
-    <div className="names">
-    <lebal>last Name
-    <input name="lastname" value=
-    {profile.lastname} type="text"onChange={handler}/>
-
-    </lebal>
-    </div>
-    
-    <div className="names">
-    <lebal>email
-    <input name="email" value=
-    {profile.email} type="text"onChange={handler}/>
-
-    </lebal>
-    </div>
-    
-    
-    <div className="names">
-    <lebal>phone
-    <input name="phone" value=
-    {profile.phone} type="text"onChange={handler}/>
-
-    </lebal>
-    </div>
-
-
-    </fieldset>
-    </form>
-
+              </div>
+              <button className='form'type='submit'>add Profile</button>
+         </form>
     </div>
   )
 }
